@@ -20,6 +20,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     let locationManager = CLLocationManager()
     var location: CLLocation?
+    var updatingLocation = false
+    var lastLocationError: NSError?
     
     @IBAction func getLocations() {
         
@@ -34,28 +36,83 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             return
         }
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.startUpdatingLocation()
+        if updatingLocation {
+            stopLocationManager()
+        } else {
+            location = nil
+            lastLocationError = nil
+            startLocationManager()
+        }
+        
+        updateLabels()
+        configureGetButton()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
+        configureGetButton()
         // Do any additional setup after loading the view.
     }
     
     // MARK: CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError \(error)")
+    
+        if (error as NSError).code == CLError.locationUnknown.rawValue {
+            return
+        }
+    
+        lastLocationError = error as NSError
+        stopLocationManager()
+        updateLabels()
+        configureGetButton()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last as! CLLocation
         print("didUpdateLocation \(newLocation)")
         
-        location = newLocation
-        updateLabels()
+        if newLocation.timestamp.timeIntervalSinceNow < -5 {
+            return
+        }
+        
+        if newLocation.horizontalAccuracy < 0 {
+            return
+        }
+        
+        if location == nil ||
+            location!.horizontalAccuracy > newLocation.horizontalAccuracy {
+            
+            lastLocationError = nil
+            location = newLocation
+            updateLabels()
+            
+            if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
+                print("*** We've done!")
+                stopLocationManager()
+                configureGetButton()
+            }
+        }
+        
+        
+    }
+    
+    func startLocationManager() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            updatingLocation = true
+        }
+    }
+    
+    func stopLocationManager() {
+        if updatingLocation {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+            updatingLocation = false
+        }
     }
     
     func updateLabels() {
@@ -73,8 +130,33 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             messageLabel.text = "Tap 'Get My Location' to Start"
         }
         
+        var statusMessage: String
+        if let error = lastLocationError {
+            if error.domain == kCLErrorDomain &&
+                error.code == CLError.denied.rawValue {
+                statusMessage = "Location services disabled"
+            } else {
+                statusMessage = "Error getting location"
+            }
+        } else if !CLLocationManager.locationServicesEnabled() {
+            statusMessage = "Location services disabled"
+        } else if updatingLocation {
+            statusMessage = "Searching..."
+        } else {
+            statusMessage = "Tap 'Get My Location' to start"
+        }
+        
+        messageLabel.text = statusMessage
     }
 
+    func configureGetButton() {
+        if updatingLocation {
+            getButton.setTitle("Stop", for: .normal)
+        } else {
+            getButton.setTitle("Get My Location", for: .normal)
+        }
+    }
+    
     func showLocationDeniedServicesDeniedAlert() {
          let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services for this app in Settigns", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
