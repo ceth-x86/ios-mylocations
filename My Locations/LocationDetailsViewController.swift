@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Dispatch
 
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -80,9 +81,13 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
         return dateFormatter.string(from: date as Date)
     }
     
+    
+    
     @IBAction func done() {
-        print("Description \(descriptionText)")
-        dismiss(animated: true, completion: nil)
+        
+        let hudView = HudView.hudInView(view: navigationController!.view, animated: true)
+        hudView.text = "Tagged"
+        afterDelay(0.6, run: { self.dismiss(animated: true, completion: nil)})
     }
     
     @IBAction func cancel() {
@@ -115,4 +120,21 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
             controller.selectCategoryName = categoryName
         }
     }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        if indexPath.section == 0 || indexPath.section == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            descriptionTextView.becomeFirstResponder()
+        }
+    }
+    
 }
