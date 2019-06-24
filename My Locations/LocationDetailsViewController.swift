@@ -30,7 +30,7 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark: CLPlacemark?
     var descriptionText = ""
-    
+    var categoryName = "No Category"
     
     override func viewDidLoad() {
         
@@ -40,6 +40,7 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
         longitudeLabel.text = String(format: "%.8f", coordinate.longitude)
         descriptionTextView.text = descriptionText
+        categoryLabel.text = categoryName
         
         if let placemark = placemark {
             addressLabel.text = stringFromPlacemark(placemark: placemark)
@@ -88,6 +89,13 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func categoryPickerDidPickCategory(segue: UIStoryboardSegue) {
+        
+        let controller = segue.source as! CategoryPickerViewController
+        categoryName = controller.selectCategoryName
+        categoryLabel.text = categoryName
+    }
+    
     // TextView
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
@@ -98,5 +106,13 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
     func textViewDidEndEditing(_ textView: UITextView) {
         
         descriptionText = textView.text
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "PickCategory" {
+            let controller = segue.destination as! CategoryPickerViewController
+            controller.selectCategoryName = categoryName
+        }
     }
 }
