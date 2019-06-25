@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 import Dispatch
 
 private let dateFormatter: DateFormatter = {
@@ -33,6 +34,9 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
     var descriptionText = ""
     var categoryName = "No Category"
     
+    var managedObjectContext: NSManagedObjectContext!
+    var date = NSDate()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -49,7 +53,7 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
             addressLabel.text = "No address found"
         }
         
-        dateLabel.text = formatDate(date: NSDate())
+        dateLabel.text = formatDate(date: date)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,6 +91,26 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
         
         let hudView = HudView.hudInView(view: navigationController!.view, animated: true)
         hudView.text = "Tagged"
+        
+        let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: managedObjectContext) as! Location
+        
+        location.locationDescription = descriptionText
+        location.category = categoryName
+        location.longitude = coordinate.longitude
+        location.latitude = coordinate.latitude
+        location.date = date
+        location.placemark = placemark
+        
+        do {
+            try managedObjectContext.save()
+            afterDelay(0.6) {
+                self.navigationController?.popViewController(
+                    animated: true)
+            }
+        } catch {
+            // fatalCoreDataError(error)
+        }
+        
         afterDelay(0.6, run: { self.dismiss(animated: true, completion: nil)})
     }
     
