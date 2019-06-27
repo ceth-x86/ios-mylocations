@@ -53,6 +53,11 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        if locationToEdit != nil {
+            title = "Edit Location"
+        }
+        
         descriptionTextView.text = ""
         categoryLabel.text = ""
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
@@ -103,9 +108,15 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
     @IBAction func done() {
         
         let hudView = HudView.hudInView(view: navigationController!.view, animated: true)
-        hudView.text = "Tagged"
+        var location: Location
         
-        let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: managedObjectContext) as! Location
+        if let temp = locationToEdit {
+            hudView.text = "Updated"
+            location = temp
+        } else {
+            hudView.text = "Tagged"
+            location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: managedObjectContext) as! Location
+        }
         
         location.locationDescription = descriptionText
         location.category = categoryName
