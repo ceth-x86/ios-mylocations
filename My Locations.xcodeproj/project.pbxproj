@@ -23,6 +23,7 @@
 		9241727B22C2631900DB6AF4 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241727A22C2631900DB6AF4 /* LocationCell.swift */; };
 		9241727E22C4CC3100DB6AF4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9241727D22C4CC3100DB6AF4 /* MapKit.framework */; };
 		9241728022C4CC5A00DB6AF4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241727F22C4CC5A00DB6AF4 /* MapViewController.swift */; };
+		927C4D4B22C6812B00150639 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927C4D4A22C6812B00150639 /* UIImage+Resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		9241727A22C2631900DB6AF4 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		9241727D22C4CC3100DB6AF4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9241727F22C4CC5A00DB6AF4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		927C4D4A22C6812B00150639 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				9241725B22C232A800DB6AF4 /* DataModel.xcdatamodeld */,
 				9241727A22C2631900DB6AF4 /* LocationCell.swift */,
 				9241727F22C4CC5A00DB6AF4 /* MapViewController.swift */,
+				927C4D4A22C6812B00150639 /* UIImage+Resize.swift */,
 			);
 			path = "My Locations";
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				9241724422BE46E800DB6AF4 /* LocationsViewController.swift in Sources */,
 				9241725822C0D55600DB6AF4 /* HudView.swift in Sources */,
 				9241727922C2385D00DB6AF4 /* Location+CoreDataProperties.swift in Sources */,
+				927C4D4B22C6812B00150639 /* UIImage+Resize.swift in Sources */,
 				9241725A22C0E15B00DB6AF4 /* Functions.swift in Sources */,
 				9241727B22C2631900DB6AF4 /* LocationCell.swift in Sources */,
 				9241728022C4CC5A00DB6AF4 /* MapViewController.swift in Sources */,
