@@ -170,6 +170,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rrf-A2-9lX">
+                                                    <rect key="frame" x="121" y="11" width="212" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -294,17 +298,19 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoLabel" destination="9EP-z3-bag" id="E5G-mH-zS1"/>
                         <outlet property="addressLabel" destination="tZc-rP-Diw" id="5SB-i2-0WX"/>
                         <outlet property="categoryLabel" destination="dEY-RF-ne1" id="wGV-Ae-QEY"/>
                         <outlet property="dateLabel" destination="OYu-P1-SMz" id="fwc-Qf-4ul"/>
                         <outlet property="descriptionTextView" destination="2MK-jA-a7Q" id="scT-05-rnE"/>
+                        <outlet property="imageView" destination="Rrf-A2-9lX" id="HV4-24-cfJ"/>
                         <outlet property="latitudeLabel" destination="FjD-7B-xhF" id="x13-pc-1LD"/>
                         <outlet property="longitudeLabel" destination="naD-a0-GoH" id="ALv-Sc-cYL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISa-vI-xVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3359" y="-29"/>
+            <point key="canvasLocation" x="3357.5999999999999" y="-29.23538230884558"/>
         </scene>
         <!--Category Picker View Controller-->
         <scene sceneID="mav-H3-y97">

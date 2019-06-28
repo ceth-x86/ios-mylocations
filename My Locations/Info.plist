@@ -45,6 +45,8 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Test</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
