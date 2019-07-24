@@ -80,6 +80,35 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
         }
         
         dateLabel.text = formatDate(date: date)
+        
+        tableView.backgroundColor = UIColor.black
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .white
+        
+        descriptionTextView.textColor = UIColor.white
+        descriptionTextView.backgroundColor = UIColor.black
+        
+        addPhotoLabel.textColor = UIColor.white
+        addPhotoLabel.highlightedTextColor = addPhotoLabel.textColor
+        
+        addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+        addPhotoLabel.highlightedTextColor = addressLabel.textColor
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.backgroundColor = UIColor.black
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.highlightedTextColor = cell.textLabel?.textColor
+        
+        if let detailLabel = cell.detailTextLabel {
+            detailLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+            detailLabel.highlightedTextColor = detailLabel.textColor
+        }
+        
+        let selection = UIView(frame: CGRect.zero)
+        selection.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        cell.selectedBackgroundView = selection
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -104,10 +133,14 @@ class LocationDetailsViewController : UITableViewController, UITextViewDelegate 
     
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
         
-        return
-            "\(placemark.subThoroughfare ?? "") \(placemark.thoroughfare ?? "")\n" +
-                "\(placemark.locality ?? "") \(placemark.administrativeArea ?? "") " +
-        "\(placemark.postalCode ?? "")"
+        var line = ""
+        line.addText(text: placemark.subThoroughfare)
+        line.addText(text: placemark.thoroughfare, withSeparator: " ")
+        line.addText(text: placemark.locality, withSeparator: ", ")
+        line.addText(text: placemark.administrativeArea, withSeparator: ", ")
+        line.addText(text: placemark.postalCode, withSeparator: " ")
+        line.addText(text: placemark.country, withSeparator: ", ")
+        return line
     }
     
     func formatDate(date: NSDate) -> String {
@@ -229,10 +262,11 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
     
     func takePhotoWithCamera() {
         
-        let imagePicker = UIImagePickerController();
+        let imagePicker = MyImagePickerController();
         imagePicker.sourceType = .camera
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
+        imagePicker.view.tintColor = view.tintColor
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -242,6 +276,7 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
+        imagePicker.view.tintColor = view.tintColor
         present(imagePicker, animated: true, completion: nil)
     }
     

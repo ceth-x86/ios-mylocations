@@ -24,6 +24,10 @@
 		9241727E22C4CC3100DB6AF4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9241727D22C4CC3100DB6AF4 /* MapKit.framework */; };
 		9241728022C4CC5A00DB6AF4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241727F22C4CC5A00DB6AF4 /* MapViewController.swift */; };
 		927C4D4B22C6812B00150639 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927C4D4A22C6812B00150639 /* UIImage+Resize.swift */; };
+		92BB384B22E9065300134616 /* Sound in Resources */ = {isa = PBXBuildFile; fileRef = 92BB384A22E9065300134616 /* Sound */; };
+		92E966F722E8734E003A1988 /* String+AddText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E966F622E8734E003A1988 /* String+AddText.swift */; };
+		92E966F922E8F361003A1988 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E966F822E8F361003A1988 /* MyTabBarController.swift */; };
+		92E966FD22E8F4C6003A1988 /* MyImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E966FC22E8F4C6003A1988 /* MyImagePickerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		9241727D22C4CC3100DB6AF4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9241727F22C4CC5A00DB6AF4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		927C4D4A22C6812B00150639 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		92BB384A22E9065300134616 /* Sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sound; sourceTree = "<group>"; };
+		92E966F622E8734E003A1988 /* String+AddText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AddText.swift"; sourceTree = "<group>"; };
+		92E966F822E8F361003A1988 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		92E966FC22E8F4C6003A1988 /* MyImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,7 @@
 		9241723322BE46E800DB6AF4 = {
 			isa = PBXGroup;
 			children = (
+				92BB384A22E9065300134616 /* Sound */,
 				9241727622C2385D00DB6AF4 /* Location+CoreDataClass.swift */,
 				9241727722C2385D00DB6AF4 /* Location+CoreDataProperties.swift */,
 				9241723E22BE46E800DB6AF4 /* My Locations */,
@@ -86,6 +95,7 @@
 				9241724122BE46E800DB6AF4 /* CurrentLocationViewController.swift */,
 				9241724322BE46E800DB6AF4 /* LocationsViewController.swift */,
 				9241724522BE46E800DB6AF4 /* Main.storyboard */,
+				92E966F822E8F361003A1988 /* MyTabBarController.swift */,
 				9241724822BE46E900DB6AF4 /* Assets.xcassets */,
 				9241724A22BE46E900DB6AF4 /* LaunchScreen.storyboard */,
 				9241724D22BE46E900DB6AF4 /* Info.plist */,
@@ -97,6 +107,8 @@
 				9241727A22C2631900DB6AF4 /* LocationCell.swift */,
 				9241727F22C4CC5A00DB6AF4 /* MapViewController.swift */,
 				927C4D4A22C6812B00150639 /* UIImage+Resize.swift */,
+				92E966F622E8734E003A1988 /* String+AddText.swift */,
+				92E966FC22E8F4C6003A1988 /* MyImagePickerController.swift */,
 			);
 			path = "My Locations";
 			sourceTree = "<group>";
@@ -169,6 +181,7 @@
 			files = (
 				9241724C22BE46E900DB6AF4 /* LaunchScreen.storyboard in Resources */,
 				9241724922BE46E900DB6AF4 /* Assets.xcassets in Resources */,
+				92BB384B22E9065300134616 /* Sound in Resources */,
 				9241724722BE46E800DB6AF4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,16 +196,19 @@
 				9241725422BFA16B00DB6AF4 /* LocationDetailsViewController.swift in Sources */,
 				9241725D22C232A800DB6AF4 /* DataModel.xcdatamodeld in Sources */,
 				9241724422BE46E800DB6AF4 /* LocationsViewController.swift in Sources */,
+				92E966FD22E8F4C6003A1988 /* MyImagePickerController.swift in Sources */,
 				9241725822C0D55600DB6AF4 /* HudView.swift in Sources */,
 				9241727922C2385D00DB6AF4 /* Location+CoreDataProperties.swift in Sources */,
 				927C4D4B22C6812B00150639 /* UIImage+Resize.swift in Sources */,
 				9241725A22C0E15B00DB6AF4 /* Functions.swift in Sources */,
 				9241727B22C2631900DB6AF4 /* LocationCell.swift in Sources */,
 				9241728022C4CC5A00DB6AF4 /* MapViewController.swift in Sources */,
+				92E966F722E8734E003A1988 /* String+AddText.swift in Sources */,
 				9241724022BE46E800DB6AF4 /* AppDelegate.swift in Sources */,
 				9241727822C2385D00DB6AF4 /* Location+CoreDataClass.swift in Sources */,
 				9241725622C0A30F00DB6AF4 /* CategoryPickerViewController.swift in Sources */,
 				9241724222BE46E800DB6AF4 /* CurrentLocationViewController.swift in Sources */,
+				92E966F922E8F361003A1988 /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

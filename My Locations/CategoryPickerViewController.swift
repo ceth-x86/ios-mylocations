@@ -27,6 +27,24 @@ class CategoryPickerViewController: UITableViewController {
     
     var selectedIndexPath = NSIndexPath()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.backgroundColor = UIColor.black
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .white
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.black
+        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.highlightedTextColor = cell.textLabel?.textColor
+        
+        let selectionView = UIView(frame: CGRect.zero)
+        selectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        cell.selectedBackgroundView = selectionView
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }

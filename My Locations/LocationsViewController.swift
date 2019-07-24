@@ -1,34 +1,3 @@
-//
-/**
- * Copyright (c) 2017 Razeware LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
- * distribute, sublicense, create a derivative work, and/or sell copies of the
- * Software in any work that is designed, intended, or marketed for pedagogical or
- * instructional purposes related to programming, coding, application development,
- * or information technology.  Permission for such use, copying, modification,
- * merger, publication, distribution, sublicensing, creation of derivative works,
- * or sale is expressly withheld.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 import UIKit
 import CoreData
 import CoreLocation
@@ -52,11 +21,37 @@ class LocationsViewController: UITableViewController {
         super.viewDidLoad()
         performFetch()
         navigationItem.rightBarButtonItem = editButtonItem
+        tableView.backgroundColor = UIColor.black
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .white
     }
     
     deinit {
         fetchedResultsController.delegate = nil
     }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let labelRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 14, width: 300, height: 14)
+        let label = UILabel(frame: labelRect)
+        label.font = UIFont.boldSystemFont(ofSize: 11)
+        
+        label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
+        
+        label.textColor = UIColor(white: 1.0, alpha: 0.4)
+        label.backgroundColor = UIColor.clear
+        
+        let separatorRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 0.5, width: tableView.bounds.size.width - 15, height: 0.5)
+        let separator = UIView(frame: separatorRect)
+        separator.backgroundColor = tableView.separatorColor
+        
+        let viewRect = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.sectionHeaderHeight)
+        let view = UIView(frame: viewRect)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.85)
+        view.addSubview(label)
+        view.addSubview(separator)
+        return view
+    }
+    
     
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -92,7 +87,7 @@ class LocationsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionInfo = fetchedResultsController.sections![section]
-        return sectionInfo.name
+        return sectionInfo.name.uppercased()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
